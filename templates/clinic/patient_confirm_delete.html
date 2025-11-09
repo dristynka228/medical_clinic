@@ -1,0 +1,9 @@
+{% extends 'clinic/base_confirm_delete.html' %}
+
+{% block title %}Удаление пациента - Медицинская Клиника{% endblock %}
+
+{% block content %}
+{% with object=patient back_url='clinic:patient_detail' %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}

@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Просмотр: {{ object }}</h1>
+        <div class="btn-group">
+            <a href="{% url back_url %}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Назад к списку
+            </a>
+            <a href="{% url edit_url object.pk %}" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Редактировать
+            </a>
+            <a href="{% url delete_url object.pk %}" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Удалить
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Информация о записи</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <!-- Для специальностей -->
+                {% if object.specialization %}
+                    <!-- Это врач -->
+                    <div class="col-md-6 mb-3">
+                        <strong>ФИО:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.last_name }} {{ object.first_name }} {{ object.middle_name }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Специальность:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.specialization.name }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Стаж:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.experience }} лет</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Телефон:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.phone }}</span>
+                    </div>
+                
+                {% elif object.birth_date %}
+                    <!-- Это пациент -->
+                    <div class="col-md-6 mb-3">
+                        <strong>ФИО:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.last_name }} {{ object.first_name }} {{ object.middle_name }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Дата рождения:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.birth_date }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Телефон:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.phone }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Email:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.email|default:"Не указано" }}</span>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <strong>Адрес:</strong>
+                        <br>
+                        <div class="mt-1 p-3 bg-light rounded">
+                            {{ object.address|linebreaksbr|default:"Не указано" }}
+                        </div>
+                    </div>
+                
+                {% elif object.number %}
+                    <!-- Это кабинет -->
+                    <div class="col-md-6 mb-3">
+                        <strong>Номер кабинета:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.number }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Этаж:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.floor }}</span>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <strong>Описание:</strong>
+                        <br>
+                        <div class="mt-1 p-3 bg-light rounded">
+                            {{ object.description|linebreaksbr|default:"Не указано" }}
+                        </div>
+                    </div>
+                
+                {% elif object.price %}
+                    <!-- Это услуга -->
+                    <div class="col-md-6 mb-3">
+                        <strong>Название услуги:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.name }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Стоимость:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.price }} руб.</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Длительность:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.duration }} мин.</span>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <strong>Описание:</strong>
+                        <br>
+                        <div class="mt-1 p-3 bg-light rounded">
+                            {{ object.description|linebreaksbr|default:"Не указано" }}
+                        </div>
+                    </div>
+                
+                {% elif object.doctor and object.cabinet %}
+                    <!-- Это расписание -->
+                    <div class="col-md-6 mb-3">
+                        <strong>Врач:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.doctor }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Кабинет:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.cabinet }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Дата:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.date }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Время:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.start_time }} - {{ object.end_time }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Доступно для записи:</strong>
+                        <br>
+                        <span class="text-muted">{% if object.is_available %}Да{% else %}Нет{% endif %}</span>
+                    </div>
+                
+                {% elif object.patient and object.service %}
+                    <!-- Это запись на прием -->
+                    <div class="col-md-6 mb-3">
+                        <strong>Пациент:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.patient }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Услуга:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.service }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Дата и время:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.appointment_date }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Статус:</strong>
+                        <br>
+                        <span class="badge 
+                            {% if object.status == 'scheduled' %}bg-primary
+                            {% elif object.status == 'completed' %}bg-success
+                            {% elif object.status == 'cancelled' %}bg-danger
+                            {% else %}bg-warning{% endif %}">
+                            {{ object.get_status_display }}
+                        </span>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <strong>Примечания:</strong>
+                        <br>
+                        <div class="mt-1 p-3 bg-light rounded">
+                            {{ object.notes|linebreaksbr|default:"Не указано" }}
+                        </div>
+                    </div>
+                
+                {% elif object.diagnosis %}
+                    <!-- Это медицинская карта -->
+                    <div class="col-md-6 mb-3">
+                        <strong>Пациент:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.patient }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Врач:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.doctor }}</span>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <strong>Дата записи:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.record_date }}</span>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <strong>Диагноз:</strong>
+                        <br>
+                        <div class="mt-1 p-3 bg-light rounded">
+                            {{ object.diagnosis|linebreaksbr }}
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <strong>Лечение:</strong>
+                        <br>
+                        <div class="mt-1 p-3 bg-light rounded">
+                            {{ object.treatment|linebreaksbr|default:"Не указано" }}
+                        </div>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <strong>Заметки:</strong>
+                        <br>
+                        <div class="mt-1 p-3 bg-light rounded">
+                            {{ object.notes|linebreaksbr|default:"Не указано" }}
+                        </div>
+                    </div>
+                
+                {% else %}
+                    <!-- Это специальность -->
+                    <div class="col-md-6 mb-3">
+                        <strong>Название:</strong>
+                        <br>
+                        <span class="text-muted">{{ object.name }}</span>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <strong>Описание:</strong>
+                        <br>
+                        <div class="mt-1 p-3 bg-light rounded">
+                            {{ object.description|linebreaksbr|default:"Не указано" }}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

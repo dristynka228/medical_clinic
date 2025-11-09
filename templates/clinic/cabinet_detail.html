@@ -1,0 +1,9 @@
+{% extends 'clinic/base_detail.html' %}
+
+{% block title %}Кабинет {{ cabinet.number }} - Медицинская Клиника{% endblock %}
+
+{% block content %}
+{% with object=cabinet back_url='clinic:cabinet_list' edit_url='clinic:cabinet_edit' delete_url='clinic:cabinet_delete' %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}

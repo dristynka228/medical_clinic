@@ -1,0 +1,9 @@
+{% extends 'clinic/base_detail.html' %}
+
+{% block title %}Запись {{ appointment.patient }} - Медицинская Клиника{% endblock %}
+
+{% block content %}
+{% with object=appointment back_url='clinic:appointment_list' edit_url='clinic:appointment_edit' delete_url='clinic:appointment_delete' %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}

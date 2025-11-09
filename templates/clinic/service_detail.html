@@ -1,0 +1,9 @@
+{% extends 'clinic/base_detail.html' %}
+
+{% block title %}{{ service.name }} - Медицинская Клиника{% endblock %}
+
+{% block content %}
+{% with object=service back_url='clinic:service_list' edit_url='clinic:service_edit' delete_url='clinic:service_delete' %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}

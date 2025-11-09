@@ -1,0 +1,282 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная - Медицинская Клиника{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="jumbotron bg-light p-5 rounded mb-4">
+            <h1 class="display-4">Добро пожаловать в Медицинскую Клинику!</h1>
+            <p class="lead">Мы предоставляем качественные медицинские услуги с заботой о каждом пациенте.</p>
+            <hr class="my-4">
+            <p>Используйте панель навигации для работы с базой данных клиники.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Панель статистики -->
+{% include 'includes/stats_panel.html' %}
+
+<!-- Управление базой данных -->
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4">
+            <i class="fas fa-database"></i> Управление базой данных
+        </h2>
+        <p class="text-muted">Выберите таблицу для просмотра и управления данными</p>
+    </div>
+</div>
+
+<!-- Карточки всех таблиц -->
+<div class="row">
+    <!-- Специальности -->
+    <div class="col-md-3 mb-4">
+        <div class="card table-card h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-stethoscope"></i> Специальности
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Медицинские специальности врачей клиники. Определяет направления медицинской помощи.</p>
+                <div class="mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-list"></i> Записей: {{ specializations_count }}
+                    </small>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'clinic:specialization_list' %}" class="btn btn-primary btn-sm">
+                    <i class="fas fa-eye"></i> Просмотр
+                </a>
+                <a href="{% url 'clinic:specialization_create' %}" class="btn btn-success btn-sm">
+                    <i class="fas fa-plus"></i> Добавить
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Врачи -->
+    <div class="col-md-3 mb-4">
+        <div class="card table-card h-100">
+            <div class="card-header bg-success text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-user-md"></i> Врачи
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Персонал медицинской клиники. Содержит информацию о врачах и их специализациях.</p>
+                <div class="mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-list"></i> Записей: {{ doctors_count }}
+                    </small>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'clinic:doctor_list' %}" class="btn btn-success btn-sm">
+                    <i class="fas fa-eye"></i> Просмотр
+                </a>
+                <a href="{% url 'clinic:doctor_create' %}" class="btn btn-success btn-sm">
+                    <i class="fas fa-plus"></i> Добавить
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Пациенты -->
+    <div class="col-md-3 mb-4">
+        <div class="card table-card h-100">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-user-injured"></i> Пациенты
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">База данных пациентов клиники. Содержит личную информацию и контактные данные.</p>
+                <div class="mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-list"></i> Записей: {{ patients_count }}
+                    </small>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'clinic:patient_list' %}" class="btn btn-info btn-sm">
+                    <i class="fas fa-eye"></i> Просмотр
+                </a>
+                <a href="{% url 'clinic:patient_create' %}" class="btn btn-success btn-sm">
+                    <i class="fas fa-plus"></i> Добавить
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Кабинеты -->
+    <div class="col-md-3 mb-4">
+        <div class="card table-card h-100">
+            <div class="card-header bg-warning text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-door-open"></i> Кабинеты
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Помещения медицинской клиники. Информация о номерах, этажах и назначении кабинетов.</p>
+                <div class="mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-list"></i> Записей: {{ cabinets_count }}
+                    </small>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'clinic:cabinet_list' %}" class="btn btn-warning btn-sm">
+                    <i class="fas fa-eye"></i> Просмотр
+                </a>
+                <a href="{% url 'clinic:cabinet_create' %}" class="btn btn-success btn-sm">
+                    <i class="fas fa-plus"></i> Добавить
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Услуги -->
+    <div class="col-md-3 mb-4">
+        <div class="card table-card h-100">
+            <div class="card-header bg-danger text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-procedures"></i> Услуги
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Медицинские услуги, предоставляемые клиникой. Стоимость, описание и длительность процедур.</p>
+                <div class="mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-list"></i> Записей: {{ services_count }}
+                    </small>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'clinic:service_list' %}" class="btn btn-danger btn-sm">
+                    <i class="fas fa-eye"></i> Просмотр
+                </a>
+                <a href="{% url 'clinic:service_create' %}" class="btn btn-success btn-sm">
+                    <i class="fas fa-plus"></i> Добавить
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Расписание -->
+    <div class="col-md-3 mb-4">
+        <div class="card table-card h-100">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-calendar-alt"></i> Расписание
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Расписание работы врачей. График приемов, кабинеты и доступность для записи.</p>
+                <div class="mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-list"></i> Записей: {{ schedules_count }}
+                    </small>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'clinic:schedule_list' %}" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-eye"></i> Просмотр
+                </a>
+                <a href="{% url 'clinic:schedule_create' %}" class="btn btn-success btn-sm">
+                    <i class="fas fa-plus"></i> Добавить
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Записи на прием -->
+    <div class="col-md-3 mb-4">
+        <div class="card table-card h-100">
+            <div class="card-header bg-dark text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-calendar-check"></i> Записи на прием
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Записи пациентов на прием к врачам. Статусы записей, даты и время визитов.</p>
+                <div class="mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-list"></i> Записей: {{ appointments_count }}
+                    </small>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'clinic:appointment_list' %}" class="btn btn-dark btn-sm">
+                    <i class="fas fa-eye"></i> Просмотр
+                </a>
+                <a href="{% url 'clinic:appointment_create' %}" class="btn btn-success btn-sm">
+                    <i class="fas fa-plus"></i> Добавить
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Медицинские карты -->
+    <div class="col-md-3 mb-4">
+        <div class="card table-card h-100">
+            <div class="card-header text-white" style="background-color: #6f42c1;">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-file-medical"></i> Медицинские карты
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Медицинские записи о пациентах. Диагнозы, назначенное лечение и история болезней.</p>
+                <div class="mb-3">
+                    <small class="text-muted">
+                        <i class="fas fa-list"></i> Записей: {{ medical_records_count }}
+                    </small>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'clinic:medical_record_list' %}" class="btn btn-sm text-white" style="background-color: #6f42c1;">
+                    <i class="fas fa-eye"></i> Просмотр
+                </a>
+                <a href="{% url 'clinic:medical_record_create' %}" class="btn btn-success btn-sm">
+                    <i class="fas fa-plus"></i> Добавить
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Блок быстрых действий -->
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-bolt"></i> Быстрые действия
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <a href="{% url 'clinic:appointment_create' %}" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-plus-circle"></i> Новая запись на прием
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="{% url 'clinic:patient_create' %}" class="btn btn-outline-success w-100">
+                            <i class="fas fa-user-plus"></i> Добавить пациента
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <a href="{% url 'clinic:doctor_create' %}" class="btn btn-outline-info w-100">
+                            <i class="fas fa-user-md"></i> Добавить врача
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

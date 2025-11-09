@@ -1,0 +1,9 @@
+{% extends 'clinic/base_form.html' %}
+
+{% block title %}{{ title }} - Медицинская Клиника{% endblock %}
+
+{% block content %}
+{% with back_url='clinic:medical_record_detail' %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Записи на прием - Медицинская Клиника{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Записи на прием</h1>
+    <a href="{% url 'clinic:appointment_create' %}" class="btn btn-success">
+        <i class="fas fa-plus"></i> Добавить запись
+    </a>
+</div>
+
+<p class="text-muted">Список записей пациентов на прием</p>
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if appointments %}
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Пациент</th>
+                    <th>Услуга</th>
+                    <th>Дата и время</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.patient }}</td>
+                    <td>{{ appointment.service }}</td>
+                    <td>{{ appointment.appointment_date }}</td>
+                    <td>
+                        <span class="badge 
+                            {% if appointment.status == 'scheduled' %}bg-primary
+                            {% elif appointment.status == 'completed' %}bg-success
+                            {% elif appointment.status == 'cancelled' %}bg-danger
+                            {% else %}bg-warning{% endif %}">
+                            {{ appointment.get_status_display }}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="btn-group btn-group-sm">
+                            <a href="{% url 'clinic:appointment_detail' appointment.pk %}" class="btn btn-info">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="#" class="btn btn-warning">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="#" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% else %}
+    <div class="text-center py-5">
+        <i class="fas fa-calendar-check fa-3x text-muted mb-3"></i>
+        <h5 class="text-muted">Нет записей на прием</h5>
+        <p class="text-muted">Нажмите "Добавить запись", чтобы создать первую запись</p>
+    </div>
+{% endif %}
+{% endblock %}

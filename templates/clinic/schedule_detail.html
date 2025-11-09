@@ -1,0 +1,9 @@
+{% extends 'clinic/base_detail.html' %}
+
+{% block title %}Расписание {{ schedule.doctor }} - Медицинская Клиника{% endblock %}
+
+{% block content %}
+{% with object=schedule back_url='clinic:schedule_list' edit_url='clinic:schedule_edit' delete_url='clinic:schedule_delete' %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}

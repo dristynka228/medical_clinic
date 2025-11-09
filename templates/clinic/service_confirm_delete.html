@@ -1,0 +1,9 @@
+{% extends 'clinic/base_confirm_delete.html' %}
+
+{% block title %}Удаление услуги - Медицинская Клиника{% endblock %}
+
+{% block content %}
+{% with object=service back_url='clinic:service_detail' %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}

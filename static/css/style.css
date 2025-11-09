@@ -1,0 +1,211 @@
+/* ===== ОСНОВНЫЕ СТИЛИ ===== */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --success-color: #27ae60;
+    --danger-color: #e74c3c;
+    --warning-color: #f39c12;
+    --info-color: #17a2b8;
+    --light-color: #ecf0f1;
+    --dark-color: #2c3e50;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #acbbff 0%, #7c73ff 100%);
+    min-height: 100vh;
+}
+
+/* ===== НАВИГАЦИЯ ===== */
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.navbar-brand i {
+    color: #ffd700;
+    margin-right: 10px;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    margin: 0 2px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.dropdown-item {
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: #3498db;
+    color: white;
+    transform: translateX(5px);
+}
+
+/* ===== КАРТОЧКИ ===== */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+    border: none;
+    font-weight: 600;
+}
+
+.table-card {
+    transition: all 0.3s ease;
+}
+
+.table-card:hover {
+    transform: translateY(-5px);
+}
+
+/* ===== КНОПКИ ===== */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-group .btn {
+    margin: 0 2px;
+    border-radius: 6px;
+}
+
+/* ===== ГЛАВНАЯ СТРАНИЦА ===== */
+.jumbotron {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.display-4 {
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ===== СТАТИСТИКА ===== */
+.stats-panel .card {
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.stats-panel .col-md-3 > div {
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.stats-panel .col-md-3 > div:hover {
+    transform: scale(1.05);
+}
+
+/* ===== ФУТЕР ===== */
+footer {
+    margin-top: 50px;
+}
+
+footer a {
+    transition: all 0.3s ease;
+}
+
+footer a:hover {
+    color: #ffd700 !important;
+    transform: translateX(5px);
+}
+
+/* ===== АНИМАЦИИ ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* ===== ОТСТУПЫ И РАЗМЕРЫ ===== */
+.container {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem !important;
+}
+
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 768px) {
+    .card {
+        margin-bottom: 20px;
+    }
+    
+    .display-4 {
+        font-size: 2rem;
+    }
+    
+    .btn-lg {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+}

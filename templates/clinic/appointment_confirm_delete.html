@@ -1,0 +1,9 @@
+{% extends 'clinic/base_confirm_delete.html' %}
+
+{% block title %}Удаление записи на прием - Медицинская Клиника{% endblock %}
+
+{% block content %}
+{% with object=appointment back_url='clinic:appointment_detail' %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'clinic/base_detail.html' %}
+
+{% block title %}Медицинская карта {{ medical_record.patient }} - Медицинская Клиника{% endblock %}
+
+{% block content %}
+{% with object=medical_record back_url='clinic:medical_record_list' edit_url='clinic:medical_record_edit' delete_url='clinic:medical_record_delete' %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'clinic/base_confirm_delete.html' %}
+
+{% block title %}Удаление расписания - Медицинская Клиника{% endblock %}
+
+{% block content %}
+{% with object=schedule back_url='clinic:schedule_detail' %}
+{{ block.super }}
+{% endwith %}
+{% endblock %}
