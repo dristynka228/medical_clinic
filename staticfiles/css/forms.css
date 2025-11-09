@@ -1,0 +1,110 @@
+/* ===== СТИЛИ ФОРМ ===== */
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    padding: 12px 15px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    transform: translateY(-2px);
+    background: white;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.form-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 5px;
+}
+
+/* Чекбоксы */
+.form-check-input {
+    width: 1.2em;
+    height: 1.2em;
+    margin-top: 0.2em;
+}
+
+.form-check-input:checked {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+/* Алерты */
+.alert {
+    border-radius: 10px;
+    border: none;
+    padding: 15px 20px;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: #155724;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #f8d7da, #f1b0b7);
+    color: #721c24;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+    color: #856404;
+}
+
+/* Цветные границы для полей */
+.form-control[name="name"],
+.form-control[name="number"],
+.form-control[id*="name"] {
+    border-left: 4px solid #667eea !important;
+}
+
+.form-control[type="date"],
+.form-control[type="time"],
+.form-control[type="datetime-local"],
+.form-control[name="experience"],
+.form-control[name="duration"] {
+    border-left: 4px solid #f39c12 !important;
+}
+
+.form-control[type="email"] {
+    border-left: 4px solid #17a2b8 !important;
+}
+
+.form-control[type="tel"],
+.form-control[name="phone"] {
+    border-left: 4px solid #e74c3c !important;
+}
+
+.form-control[name="price"] {
+    border-left: 4px solid #27ae60 !important;
+}
+
+.form-select {
+    border-left: 4px solid #9b59b6 !important;
+}
+
+textarea.form-control {
+    border-left: 4px solid #34495e !important;
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Иконки в формах */
+.form-label i {
+    width: 20px;
+    text-align: center;
+    margin-right: 8px;
+    color: #667eea;
+}

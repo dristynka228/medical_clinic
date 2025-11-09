@@ -5,7 +5,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import *
 from .serializers import *
 
-# Базовый класс для всех ViewSets с поиском
 class BaseViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     
@@ -24,17 +23,16 @@ class BaseViewSet(viewsets.ModelViewSet):
 class SpecializationViewSet(BaseViewSet):
     queryset = Specialization.objects.all()
     serializer_class = SpecializationSerializer
-    search_fields = ['name']  # Поиск по названию специальности
+    search_fields = ['name']  
 
 class DoctorViewSet(BaseViewSet):
     queryset = Doctor.objects.all()
     serializer_class = DoctorSerializer
-    search_fields = ['last_name', 'first_name']  # Поиск по фамилии и имени
-
+    search_fields = ['last_name', 'first_name']  
 class PatientViewSet(BaseViewSet):
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
-    search_fields = ['last_name', 'first_name']  # Поиск по фамилии и имени
+    search_fields = ['last_name', 'first_name'] 
     
     def get_permissions(self):
         """
@@ -45,32 +43,29 @@ class PatientViewSet(BaseViewSet):
         if self.action in ['list', 'retrieve']:
             return [permissions.IsAuthenticated()]
         else:
-            return [permissions.IsAuthenticated()]  # Запрещаем все остальные методы
+            return [permissions.IsAuthenticated()] 
 
 class CabinetViewSet(BaseViewSet):
     queryset = Cabinet.objects.all()
     serializer_class = CabinetSerializer
-    search_fields = ['number']  # Поиск по номеру кабинета
-
+    search_fields = ['number'] 
 class ServiceViewSet(BaseViewSet):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
-    search_fields = ['name']  # Поиск по названию услуги
-
+    search_fields = ['name']  
 class ScheduleViewSet(BaseViewSet):
     queryset = Schedule.objects.all()
     serializer_class = ScheduleSerializer
-    search_fields = ['doctor__last_name']  # Поиск по фамилии врача
+    search_fields = ['doctor__last_name']  
 
 class AppointmentViewSet(BaseViewSet):
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
-    search_fields = ['patient__last_name']  # Поиск по фамилии пациента
-
+    search_fields = ['patient__last_name']  
 class MedicalRecordViewSet(BaseViewSet):
     queryset = MedicalRecord.objects.all()
     serializer_class = MedicalRecordSerializer
-    search_fields = ['patient__last_name']  # Поиск по фамилии пациента
+    search_fields = ['patient__last_name'] 
     
     def get_permissions(self):
         """
@@ -81,4 +76,4 @@ class MedicalRecordViewSet(BaseViewSet):
         if self.action in ['list', 'retrieve']:
             return [permissions.IsAuthenticated()]
         else:
-            return [permissions.IsAuthenticated()]  # Запрещаем все остальные методы
+            return [permissions.IsAuthenticated()]  
